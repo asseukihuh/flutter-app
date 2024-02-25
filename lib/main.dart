@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -57,6 +59,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  // ignore: unused_field
+  String _modifiabletext = 'hello';
 
   void _incrementCounter() {
     setState(() {
@@ -66,6 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
+      _modifiabletext = 'goodbye';
     });
   }
 
@@ -77,6 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter--;
+      _modifiabletext = 'yo what ?';
     });
   }
 
@@ -128,6 +134,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const Text(
               'I dont know what to get here',
+            ),
+            Text(
+              '$_modifiabletext',
             ),
             IconButton(
               onPressed: _decrementCounter, 
