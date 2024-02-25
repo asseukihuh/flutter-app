@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
-      _modifiabletext = 'goodbye';
+      _modifiabletext = 'yo what ?';
     });
   }
 
@@ -83,7 +83,12 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter--;
-      _modifiabletext = 'yo what ?';
+      switch (_counter) {
+        case > 0:
+          _modifiabletext = 'thats good';
+        case < 0:
+          _modifiabletext = 'youre goofy';
+      }
     });
   }
 
@@ -140,7 +145,6 @@ class _MyHomePageState extends State<MyHomePage> {
             // quatrieme route.
             break;
     }
-    print(index);print(index);
         },
         selectedIndex: currentPageIndex,
         destinations: const [
