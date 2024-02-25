@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(0, 146, 234, 250)),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 255, 255, 255)),
         useMaterial3: true,
       ),
       home: const MyHomePage(title:'fzafazfaz'),
@@ -61,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   // ignore: unused_field
   String _modifiabletext = 'hello';
+  int currentPageIndex = 0;
 
   void _incrementCounter() {
     setState(() {
@@ -105,53 +106,147 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('LOGO'),
         centerTitle: true,
       ),
-      body: Align(
-        alignment: Alignment.center,
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            const Text(
-              'I dont know what to get here',
-            ),
-            Text(
-              '$_modifiabletext',
-            ),
-            IconButton(
-              onPressed: _decrementCounter, 
-              icon: const Icon(Icons.favorite, size: 50)
-            )
-
-          ],
-        ),
-      ),
+      
+      body: _buildBody(),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
+
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: (index) {
+          setState(() {
+          currentPageIndex = index;
+        });
+        switch (index) {
+          case 0:
+            // Ne rien faire
+            break;
+          case 1:
+            // seconde route.
+            
+            //Navigator.push(
+            //  context,
+            //  MaterialPageRoute(builder: (context) => SecondRoute()),
+            //);
+            
+            break;
+          case 2:
+            // troiseme route.
+            break;
+          case 3:
+            // quatrieme route.
+            break;
+    }
+    print(index);print(index);
+        },
+        selectedIndex: currentPageIndex,
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.home), 
+            label: 'home'
+            ),
+          NavigationDestination(
+            icon: Icon(Icons.add_circle_outline), 
+            label: 'add'
+            ),
+          NavigationDestination(
+            icon: Icon(Icons.video_library_outlined),
+            label: 'video'
+            ),
+          NavigationDestination(
+            icon: Icon(Icons.account_circle_outlined),
+            label: 'account'
+           ),
+        ],
+      ),
+    
     );
   }
+  Widget _buildBody() {
+    switch (currentPageIndex) {
+      case 0:
+        return _buildHomePageContent();
+      case 1:
+        return _buildAddPageContent();
+      case 2:
+        return _buildVideoPageContent();
+      case 3:
+        return _buildAccountPageContent();
+      default:
+        return Container(); //unknown pages
+    }
+  }
+    Widget _buildHomePageContent() {
+    return Align(
+      alignment: Alignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          const Text(
+            'You have pushed the button many times:',
+          ),
+          Text(
+            '$_counter',
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+          const Text(
+            'I dont know what to get here',
+          ),
+          Text(
+            '$_modifiabletext',
+          ),
+          IconButton(
+            onPressed: _decrementCounter,
+            icon: const Icon(Icons.favorite, size: 50)
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAddPageContent() {
+    return const Center(
+      child: Text(
+        'HELLO WORLD',
+        style: TextStyle(fontSize: 24),
+      ),
+    );
+  }
+
+  Widget _buildVideoPageContent() {
+    // Build content for video page
+    return Container();
+  }
+
+  Widget _buildAccountPageContent() {
+    // Build content for account page
+    return Container();
+  }
+}
+
+class SecondRoute extends StatelessWidget {
+  const SecondRoute({super.key});
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Second Route'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            //retouner a la page d'avant
+          },
+          child: const Text('Go back!'),
+        ),
+      ),
+    );
+  }
+  
+  
+  
 }
