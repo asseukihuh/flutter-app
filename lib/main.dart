@@ -1,5 +1,6 @@
 
 
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 255, 255, 255)),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink.shade100),
         useMaterial3: true,
       ),
       home: const MyHomePage(title:'fzafazfaz'),
@@ -60,7 +61,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   // ignore: unused_field
-  String _modifiabletext = 'hello';
+  String _modifiabletext = 'hey yo';
   int currentPageIndex = 0;
 
   void _incrementCounter() {
@@ -105,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // TRY THIS: Try changing the color here to a specific color (to
         // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
         // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Colors.transparent,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: const Text('LOGO'),
@@ -113,100 +114,101 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       
       body: _buildBody(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      //floatingActionButton: FloatingActionButton(
+      //  onPressed: _incrementCounter,
+      //  tooltip: 'Increment',
+      //  child: const Icon(Icons.add),
+      //),
 
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      bottomNavigationBar: NavigationBar(
-        onDestinationSelected: (index) {
-          setState(() {
-          currentPageIndex = index;
-        });
-        switch (index) {
-          case 0:
-            // Ne rien faire
-            break;
-          case 1:
-            // seconde route.
-            
-            //Navigator.push(
-            //  context,
-            //  MaterialPageRoute(builder: (context) => SecondRoute()),
-            //);
-            
-            break;
-          case 2:
-            // troiseme route.
-            break;
-          case 3:
-            // quatrieme route.
-            break;
-    }
-        },
-        selectedIndex: currentPageIndex,
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.home), 
-            label: 'home'
-            ),
-          NavigationDestination(
-            icon: Icon(Icons.add_circle_outline), 
-            label: 'add'
-            ),
-          NavigationDestination(
-            icon: Icon(Icons.video_library_outlined),
-            label: 'video'
-            ),
-          NavigationDestination(
-            icon: Icon(Icons.account_circle_outlined),
-            label: 'account'
-           ),
-        ],
+      //floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      bottomNavigationBar: Container(
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        color: Colors.white, // couleur navbar
       ),
-    
+      child: BottomAppBar(
+        elevation: 0,
+        shape: const CircularNotchedRectangle(),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.home),
+              onPressed: () {
+                setState(() {
+                  currentPageIndex = 0;
+                });
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.add_circle_outline),
+              onPressed: () {
+                setState(() {
+                  currentPageIndex = 1;
+                });
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.video_library_outlined),
+              onPressed: () {
+                setState(() {
+                  currentPageIndex = 2;
+                });
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.account_circle_outlined),
+              onPressed: () {
+                setState(() {
+                  currentPageIndex = 3;
+                });
+              },
+            ),
+          ],
+        ),
+      )
+      )
     );
   }
   Widget _buildBody() {
     switch (currentPageIndex) {
-      case 0:
-        return _buildHomePageContent();
       case 1:
         return _buildAddPageContent();
+      case 0:
+        return _buildHomePageContent();
       case 2:
         return _buildVideoPageContent();
       case 3:
         return _buildAccountPageContent();
       default:
-        return Container(); //unknown pages
+        return Container(); //pages inconnues
     }
   }
-    Widget _buildHomePageContent() {
-    return Align(
+  Widget _buildHomePageContent() {
+    return const Align(
       alignment: Alignment.center,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          const Text(
-            'You have pushed the button many times:',
-          ),
-          Text(
-            '$_counter',
-            style: Theme.of(context).textTheme.headlineMedium,
-          ),
-          const Text(
-            'I dont know what to get here',
-          ),
-          Text(
-            '$_modifiabletext',
-          ),
-          IconButton(
-            onPressed: _decrementCounter,
-            icon: const Icon(Icons.favorite, size: 50)
-          )
-        ],
+      child: Text(
+        'HOME'
+        //mainAxisAlignment: MainAxisAlignment.center,
+        //children: <Widget>[
+        //  const Text(
+        //    'You have pushed the button many times:',
+        //  ),
+        //  Text(
+        //    '$_counter',
+        //    style: Theme.of(context).textTheme.headlineMedium,
+        //  ),
+        //  const Text(
+        //    'I dont know what to get here',
+        //  ),
+        //  Text(
+        //    _modifiabletext,
+        //  ),
+        //  IconButton(
+        //    onPressed: _decrementCounter,
+        //    icon: const Icon(Icons.favorite, size: 50)
+        //  )
+        //],
       ),
     );
   }
@@ -222,7 +224,25 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildVideoPageContent() {
     // Build content for video page
-    return Container();
+    return Container (
+      height: 200,
+      alignment: Alignment.topCenter,
+      decoration: const BoxDecoration(
+        shape: BoxShape.rectangle,
+        color: Colors.blue,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(15.0),
+          bottomRight: Radius.circular(15.0),
+          topRight: Radius.circular(15.0),
+          bottomLeft: Radius.circular(15.0),
+        ),
+        
+      ),
+      
+      child: const Text("this is a video"),
+      padding: EdgeInsets.all(20.0),
+      margin: EdgeInsets.all(20),
+    );
   }
 
   Widget _buildAccountPageContent() {
