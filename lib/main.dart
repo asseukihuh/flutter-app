@@ -206,7 +206,7 @@ class _MyHomePageState extends State<MyHomePage> {
         //  ),
         //  IconButton(
         //    onPressed: _decrementCounter,
-        //    icon: const Icon(Icons.favorite, size: 50)
+        //    icon: const Icon(Icons.favorite, size: 50)//daizadjajaiozfjajf
         //  )
         //],
       ),
