@@ -1,6 +1,6 @@
 
 
-
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -32,7 +32,6 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink.shade100),
         useMaterial3: true,
       ),
       home: const MyHomePage(title:'fzafazfaz'),
@@ -63,6 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
   // ignore: unused_field
   String _modifiabletext = 'hey yo';
   int currentPageIndex = 0;
+  final TextStyle dmSansStyle = GoogleFonts.dmSans();
 
   void _incrementCounter() {
     setState(() {
@@ -102,16 +102,19 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
+      //extendBodyBehindAppBar: true,
+      //appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
         // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
         // change color while the other colors stay the same.
-        backgroundColor: Colors.transparent,
+        //backgroundColor: Colors.white.withAlpha(200),
+        //surfaceTintColor: Colors.transparent,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: const Text('LOGO'),
-        centerTitle: true,
-      ),
+        //title: Image.file(),
+        //elevation: 0,
+        //centerTitle: true,
+      //),
       
       body: _buildBody(),
       //floatingActionButton: FloatingActionButton(
@@ -124,7 +127,6 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: Container(
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-        color: Colors.white, // couleur navbar
       ),
       child: BottomAppBar(
         elevation: 0,
@@ -206,7 +208,7 @@ class _MyHomePageState extends State<MyHomePage> {
         //  ),
         //  IconButton(
         //    onPressed: _decrementCounter,
-        //    icon: const Icon(Icons.favorite, size: 50)//da
+        //    icon: const Icon(Icons.favorite, size: 50)
         //  )
         //],
       ),
@@ -225,16 +227,30 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _buildVideoPageContent() {
     // Build content for video page
     return Scaffold (
-      resizeToAvoidBottomInset: false, // set it to false
+      //resizeToAvoidBottomInset: false, // set it to false
+      body: NestedScrollView(
+        headerSliverBuilder: (context, InnerBoxIsScrolled) => [
+          SliverAppBar(
+            floating: true,
+            snap: true,
+            backgroundColor: Colors.white.withAlpha(200),
+            surfaceTintColor: Colors.transparent,
+            title: Text('Discover'),
+            elevation: 0,
+            centerTitle: true,
+          ),
+        ],
+
       body: SingleChildScrollView(
+        //padding: const EdgeInsets.only(top: 100.0), // Ajout de la marge seulement en haut
         child: Column(
           children: [
           Container(
-          height: 400,
+          height: 300,
           alignment: Alignment.topCenter,
           decoration: const BoxDecoration(
             shape: BoxShape.rectangle,
-            color: Colors.blue,
+            color: Colors.grey,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(15.0),
               bottomRight: Radius.circular(15.0),
@@ -252,11 +268,51 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
 
         Container (
-            height: 400,
+            height: 300,
             alignment: Alignment.topCenter,
             decoration: const BoxDecoration(
               shape: BoxShape.rectangle,
-              color: Colors.blue,
+              color: Colors.grey,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(15.0),
+                bottomRight: Radius.circular(15.0),
+                topRight: Radius.circular(15.0),
+                bottomLeft: Radius.circular(15.0),
+              ),
+            ),
+            padding: const EdgeInsets.all(20.0),
+            margin: const EdgeInsets.all(20),
+            child: const Center(
+              child: Text("This should be another project"),
+            ),
+          ),
+
+          Container (
+            height: 300,
+            alignment: Alignment.topCenter,
+            decoration: const BoxDecoration(
+              shape: BoxShape.rectangle,
+              color: Colors.grey,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(15.0),
+                bottomRight: Radius.circular(15.0),
+                topRight: Radius.circular(15.0),
+                bottomLeft: Radius.circular(15.0),
+              ),
+            ),
+            padding: const EdgeInsets.all(20.0),
+            margin: const EdgeInsets.all(20),
+            child: const Center(
+              child: Text("This should be another project"),
+            ),
+          ),
+
+          Container (
+            height: 300,
+            alignment: Alignment.topCenter,
+            decoration: const BoxDecoration(
+              shape: BoxShape.rectangle,
+              color: Colors.grey,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(15.0),
                 bottomRight: Radius.circular(15.0),
@@ -273,6 +329,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
     )
+  ),
   );
 }
 
