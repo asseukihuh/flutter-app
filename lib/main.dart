@@ -1,5 +1,8 @@
 
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_project/circle.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
@@ -64,6 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int currentPageIndex = 0;
   final TextStyle dmSansStyle = GoogleFonts.dmSans();
 
+  // ignore: unused_element
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -76,6 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  // ignore: unused_element
   void _decrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -187,10 +192,80 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
   Widget _buildHomePageContent() {
-    return const Align(
-      alignment: Alignment.center,
-      child: Text(
-        'HOME'
+  return Scaffold(
+    body: NestedScrollView(
+      headerSliverBuilder: (context, InnerBoxIsScrolled) => [
+        SliverAppBar(
+          floating: true,
+          snap: true,
+          backgroundColor: Colors.white.withAlpha(200),
+          surfaceTintColor: Colors.transparent,
+          elevation: 0,
+          centerTitle: true,
+          title: const Text(
+            'Abonnements',
+            style: TextStyle(
+              fontFamily: "DmSans",
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: 150,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(220, 220, 220, 100),
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            Container(
+              child: Column(
+                children: List.generate(3, (index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 300,
+                      alignment: Alignment.topCenter,
+                      margin: const EdgeInsets.all(7.5),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        color: Color.fromRGBO(220, 220, 220, 100),
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                      child: const Center(
+                        child: Text("This should be another project"),
+                      ),
+                    ),
+                  );
+                }),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+      //alignment: Alignment.center,
+      //child: Text(
+      //  'HOME'
         //mainAxisAlignment: MainAxisAlignment.center,
         //children: <Widget>[
         //  const Text(
@@ -211,8 +286,7 @@ class _MyHomePageState extends State<MyHomePage> {
         //    icon: const Icon(Icons.favorite, size: 50)
         //  )
         //],
-      ),
-    );
+      
   }
 
   Widget _buildAddPageContent() {
@@ -235,100 +309,40 @@ class _MyHomePageState extends State<MyHomePage> {
             snap: true,
             backgroundColor: Colors.white.withAlpha(200),
             surfaceTintColor: Colors.transparent,
-            title: Text('Discover'),
+            title: const Text('Découvrir', 
+            style: TextStyle(
+              fontFamily: "DmSans",
+              fontWeight: FontWeight.bold,
+              ), 
+            ),
             elevation: 0,
             centerTitle: true,
           ),
         ],
 
       body: SingleChildScrollView(
-        //padding: const EdgeInsets.only(top: 100.0), // Ajout de la marge seulement en haut
         child: Column(
-          children: [
-          Container(
-          height: 300,
-          alignment: Alignment.topCenter,
-          decoration: const BoxDecoration(
-            shape: BoxShape.rectangle,
-            color: Colors.grey,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15.0),
-              bottomRight: Radius.circular(15.0),
-              topRight: Radius.circular(15.0),
-              bottomLeft: Radius.circular(15.0),
-            ),
-          ),
-          padding: const EdgeInsets.all(20.0),
-          margin: const EdgeInsets.all(20),
-          
-          
-          child: const Center(
-            child: Text("This should be someone's project"),
-          ),
-          ),
-
-        Container (
-            height: 300,
-            alignment: Alignment.topCenter,
-            decoration: const BoxDecoration(
-              shape: BoxShape.rectangle,
-              color: Colors.grey,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(15.0),
-                bottomRight: Radius.circular(15.0),
-                topRight: Radius.circular(15.0),
-                bottomLeft: Radius.circular(15.0),
+          children: List.generate(9, (index) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 300,
+                alignment: Alignment.topCenter,
+                margin: const EdgeInsets.all(7.5),
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  color: Color.fromRGBO(220, 220, 220, 100),
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                child: const Center(
+                  child: Text("This should be another project"),
+                ),
               ),
-            ),
-            padding: const EdgeInsets.all(20.0),
-            margin: const EdgeInsets.all(20),
-            child: const Center(
-              child: Text("This should be another project"),
-            ),
-          ),
+            );
+          }),
+        ),
+      )
 
-          Container (
-            height: 300,
-            alignment: Alignment.topCenter,
-            decoration: const BoxDecoration(
-              shape: BoxShape.rectangle,
-              color: Colors.grey,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(15.0),
-                bottomRight: Radius.circular(15.0),
-                topRight: Radius.circular(15.0),
-                bottomLeft: Radius.circular(15.0),
-              ),
-            ),
-            padding: const EdgeInsets.all(20.0),
-            margin: const EdgeInsets.all(20),
-            child: const Center(
-              child: Text("This should be another project"),
-            ),
-          ),
-
-          Container (
-            height: 300,
-            alignment: Alignment.topCenter,
-            decoration: const BoxDecoration(
-              shape: BoxShape.rectangle,
-              color: Colors.grey,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(15.0),
-                bottomRight: Radius.circular(15.0),
-                topRight: Radius.circular(15.0),
-                bottomLeft: Radius.circular(15.0),
-              ),
-            ),
-            padding: const EdgeInsets.all(20.0),
-            margin: const EdgeInsets.all(20),
-            child: const Center(
-              child: Text("This should be another project"),
-            ),
-          ),
-        ],
-      ),
-    )
   ),
   );
 }
@@ -337,7 +351,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // Build content for account page
     return Container();
   }
-}
 
 class SecondRoute extends StatelessWidget {
   const SecondRoute({super.key});
@@ -358,7 +371,4 @@ class SecondRoute extends StatelessWidget {
       ),
     );
   }
-  
-  
-  
 }
