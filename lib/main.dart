@@ -1,3 +1,6 @@
+
+
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,7 +14,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter',
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // TRY THIS: Try running your application with "flutter run". You'll see
+        // the application has a purple toolbar. Then, without quitting the app,
+        // try changing the seedColor in the colorScheme below to Colors.green
+        // and then invoke "hot reload" (save your changes or press the "hot
+        // reload" button in a Flutter-supported IDE, or press "r" if you used
+        // the command line to start the app).
+        //
+        // Notice that the counter didn't reset back to zero; the application
+        // state is not lost during the reload. To reset the state, use hot
+        // restart instead.
+        //
+        // This works for code too, not just values: Most code changes can be
+        // tested with just a hot reload.
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink.shade100),
+        useMaterial3: true,
+      ),
+      home: const MyHomePage(title:'fzafazfaz'),
     );
   }
 }
@@ -36,6 +60,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  // ignore: unused_field
+  String _modifiabletext = 'hey yo';
+  int currentPageIndex = 0;
 
   void _incrementCounter() {
     setState(() {
@@ -45,6 +72,24 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
+      _modifiabletext = 'yo what ?';
+    });
+  }
+
+  void _decrementCounter() {
+    setState(() {
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
+      _counter--;
+      switch (_counter) {
+        case > 0:
+          _modifiabletext = 'thats good';
+        case < 0:
+          _modifiabletext = 'youre goofy';
+      }
     });
   }
 
@@ -61,45 +106,202 @@ class _MyHomePageState extends State<MyHomePage> {
         // TRY THIS: Try changing the color here to a specific color (to
         // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
         // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Colors.transparent,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: const Text('LOGO'),
+        centerTitle: true,
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+      
+      body: _buildBody(),
+      //floatingActionButton: FloatingActionButton(
+      //  onPressed: _incrementCounter,
+      //  tooltip: 'Increment',
+      //  child: const Icon(Icons.add),
+      //),
+
+      //floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      bottomNavigationBar: Container(
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        color: Colors.white, // couleur navbar
+      ),
+      child: BottomAppBar(
+        elevation: 0,
+        shape: const CircularNotchedRectangle(),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.home),
+              onPressed: () {
+                setState(() {
+                  currentPageIndex = 0;
+                });
+              },
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            IconButton(
+              icon: const Icon(Icons.add_circle_outline),
+              onPressed: () {
+                setState(() {
+                  currentPageIndex = 1;
+                });
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.video_library_outlined),
+              onPressed: () {
+                setState(() {
+                  currentPageIndex = 2;
+                });
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.account_circle_outlined),
+              onPressed: () {
+                setState(() {
+                  currentPageIndex = 3;
+                });
+              },
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      )
+      )
     );
   }
+  Widget _buildBody() {
+    switch (currentPageIndex) {
+      case 1:
+        return _buildAddPageContent();
+      case 0:
+        return _buildHomePageContent();
+      case 2:
+        return _buildVideoPageContent();
+      case 3:
+        return _buildAccountPageContent();
+      default:
+        return Container(); //pages inconnues
+    }
+  }
+  Widget _buildHomePageContent() {
+    return const Align(
+      alignment: Alignment.center,
+      child: Text(
+        'HOME'
+        //mainAxisAlignment: MainAxisAlignment.center,
+        //children: <Widget>[
+        //  const Text(
+        //    'You have pushed the button many times:',
+        //  ),
+        //  Text(
+        //    '$_counter',
+        //    style: Theme.of(context).textTheme.headlineMedium,
+        //  ),
+        //  const Text(
+        //    'I dont know what to get here',
+        //  ),
+        //  Text(
+        //    _modifiabletext,
+        //  ),
+        //  IconButton(
+        //    onPressed: _decrementCounter,
+        //    icon: const Icon(Icons.favorite, size: 50)
+        //  )
+        //],
+      ),
+    );
+  }
+
+  Widget _buildAddPageContent() {
+    return const Center(
+      child: Text(
+        'HELLO WORLD',
+        style: TextStyle(fontSize: 24),
+      ),
+    );
+  }
+
+  Widget _buildVideoPageContent() {
+    // Build content for video page
+    return Scaffold (
+      resizeToAvoidBottomInset: false, // set it to false
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+          Container(
+          height: 400,
+          alignment: Alignment.topCenter,
+          decoration: const BoxDecoration(
+            shape: BoxShape.rectangle,
+            color: Colors.blue,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15.0),
+              bottomRight: Radius.circular(15.0),
+              topRight: Radius.circular(15.0),
+              bottomLeft: Radius.circular(15.0),
+            ),
+          ),
+          padding: const EdgeInsets.all(20.0),
+          margin: const EdgeInsets.all(20),
+          
+          
+          child: const Center(
+            child: Text("This should be someone's project"),
+          ),
+          ),
+
+        Container (
+            height: 400,
+            alignment: Alignment.topCenter,
+            decoration: const BoxDecoration(
+              shape: BoxShape.rectangle,
+              color: Colors.blue,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(15.0),
+                bottomRight: Radius.circular(15.0),
+                topRight: Radius.circular(15.0),
+                bottomLeft: Radius.circular(15.0),
+              ),
+            ),
+            padding: const EdgeInsets.all(20.0),
+            margin: const EdgeInsets.all(20),
+            child: const Center(
+              child: Text("This should be another project"),
+            ),
+          ),
+        ],
+      ),
+    )
+  );
+}
+
+  Widget _buildAccountPageContent() {
+    // Build content for account page
+    return Container();
+  }
+}
+
+class SecondRoute extends StatelessWidget {
+  const SecondRoute({super.key});
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Second Route'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            //retouner a la page d'avant
+          },
+          child: const Text('Go back!'),
+        ),
+      ),
+    );
+  }
+  
+  
+  
 }
