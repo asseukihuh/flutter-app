@@ -1,8 +1,5 @@
 
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_project/circle.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
@@ -13,28 +10,16 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  //Racine de l'application.
+  //Builder
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
+        //Theme de l'application
         useMaterial3: true,
       ),
       home: const MyHomePage(title:'fzafazfaz'),
@@ -45,14 +30,7 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
+  //Homepage
 
   final String title;
 
@@ -60,6 +38,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+// Class MyHomePage
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   // ignore: unused_field
@@ -70,11 +49,9 @@ class _MyHomePageState extends State<MyHomePage> {
   // ignore: unused_element
   void _incrementCounter() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
+      // Fonction _decrementcounter
+      // ajoute un de counter 
+      // Modifie le texte _modifiabletext
       _counter++;
       _modifiabletext = 'yo what ?';
     });
@@ -83,11 +60,9 @@ class _MyHomePageState extends State<MyHomePage> {
   // ignore: unused_element
   void _decrementCounter() {
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
+      // Fonction _decrementcounter
+      // retire un de counter 
+      // Modifie le texte _modifiabletext
       _counter--;
       switch (_counter) {
         case > 0:
@@ -107,32 +82,15 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      //extendBodyBehindAppBar: true,
-      //appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        //backgroundColor: Colors.white.withAlpha(200),
-        //surfaceTintColor: Colors.transparent,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        //title: Image.file(),
-        //elevation: 0,
-        //centerTitle: true,
-      //),
+      // Structure fixe principale 
+      // Contien le Appbar bottom
       
       body: _buildBody(),
-      //floatingActionButton: FloatingActionButton(
-      //  onPressed: _incrementCounter,
-      //  tooltip: 'Increment',
-      //  child: const Icon(Icons.add),
-      //),
-
-      //floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       bottomNavigationBar: Container(
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
+      // Bottom AppBar
       child: BottomAppBar(
         elevation: 0,
         shape: const CircularNotchedRectangle(),
@@ -143,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: const Icon(Icons.home),
               onPressed: () {
                 setState(() {
-                  currentPageIndex = 0;
+                  currentPageIndex = 0; //Change l'index pour aller au menu home
                 });
               },
             ),
@@ -151,15 +109,15 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: const Icon(Icons.add_circle_outline),
               onPressed: () {
                 setState(() {
-                  currentPageIndex = 1;
+                  currentPageIndex = 1; //Change l'index pour aller au menu ajouter
                 });
               },
             ),
             IconButton(
-              icon: const Icon(Icons.video_library_outlined),
+              icon: const Icon(Icons.video_library_outlined), 
               onPressed: () {
                 setState(() {
-                  currentPageIndex = 2;
+                  currentPageIndex = 2; //Change l'index pour aller au menu decouverte
                 });
               },
             ),
@@ -167,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: const Icon(Icons.account_circle_outlined),
               onPressed: () {
                 setState(() {
-                  currentPageIndex = 3;
+                  currentPageIndex = 3; //Change l'index pour aller au menu compte
                 });
               },
             ),
@@ -178,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
   Widget _buildBody() {
-    switch (currentPageIndex) {
+    switch (currentPageIndex) { // Condition dans le cas ou la valeur Current pasge index change, le widget change
       case 1:
         return _buildAddPageContent();
       case 0:
@@ -191,9 +149,10 @@ class _MyHomePageState extends State<MyHomePage> {
         return Container(); //pages inconnues
     }
   }
-  Widget _buildHomePageContent() {
+  Widget _buildHomePageContent() { //Page HomePage 
   return Scaffold(
     body: NestedScrollView(
+      // ignore: non_constant_identifier_names
       headerSliverBuilder: (context, InnerBoxIsScrolled) => [
         SliverAppBar(
           floating: true,
@@ -214,10 +173,10 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
+            SizedBox(
               height: 150,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
+              child: ListView.builder( //ListView.Builder crée une liste d'items de nombre itemCount avec un axe Horizontal (Scroll abonnemnts instagram)
+                scrollDirection: Axis.horizontal, //Génère des ronds de profile pour chaque profile mis en amis
                 itemCount: 10,
                 itemBuilder: (context, index) {
                   return Padding(
@@ -225,7 +184,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Container(
                       width: 100,
                       height: 100,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Color.fromRGBO(220, 220, 220, 100),
                         shape: BoxShape.circle,
                       ),
@@ -234,27 +193,25 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
             ),
-            Container(
-              child: Column(
-                children: List.generate(3, (index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 300,
-                      alignment: Alignment.topCenter,
-                      margin: const EdgeInsets.all(7.5),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        color: Color.fromRGBO(220, 220, 220, 100),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      child: const Center(
-                        child: Text("This should be another project"),
-                      ),
+            Column(
+              children: List.generate(3, (index) { //Génère grace a List.generate une liste de Containers qui sont des containers a images et contenu
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 300,
+                    alignment: Alignment.topCenter,
+                    margin: const EdgeInsets.all(7.5),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      color: const Color.fromRGBO(220, 220, 220, 100),
+                      borderRadius: BorderRadius.circular(15.0),
                     ),
-                  );
-                }),
-              ),
+                    child: const Center(
+                      child: Text("This should be another project"),
+                    ),
+                  ),
+                );
+              }),
             ),
           ],
         ),
@@ -289,7 +246,7 @@ class _MyHomePageState extends State<MyHomePage> {
       
   }
 
-  Widget _buildAddPageContent() {
+  Widget _buildAddPageContent() { //Page AddPage
     return const Center(
       child: Text(
         'HELLO WORLD',
@@ -298,12 +255,13 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget _buildVideoPageContent() {
+  Widget _buildVideoPageContent() { //Page VideoDecouverte
     // Build content for video page
     return Scaffold (
       //resizeToAvoidBottomInset: false, // set it to false
       body: NestedScrollView(
-        headerSliverBuilder: (context, InnerBoxIsScrolled) => [
+        // ignore: non_constant_identifier_names
+        headerSliverBuilder: (context, InnerBoxIsScrolled) => [ // Crée une appbar qui descend ou monte par rapport au scroll
           SliverAppBar(
             floating: true,
             snap: true,
@@ -320,9 +278,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
 
-      body: SingleChildScrollView(
+      body: SingleChildScrollView( 
         child: Column(
-          children: List.generate(9, (index) {
+          children: List.generate(9, (index) { //Génère grace a la foction list.generate une nombre defini et modifiable de Containers.
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -331,7 +289,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 margin: const EdgeInsets.all(7.5),
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
-                  color: Color.fromRGBO(220, 220, 220, 100),
+                  color: const Color.fromRGBO(220, 220, 220, 100),
                   borderRadius: BorderRadius.circular(15.0),
                 ),
                 child: const Center(
@@ -347,12 +305,12 @@ class _MyHomePageState extends State<MyHomePage> {
   );
 }
 
-  Widget _buildAccountPageContent() {
+  Widget _buildAccountPageContent() { //PAge Account
     // Build content for account page
     return Container();
   }
 
-class SecondRoute extends StatelessWidget {
+class SecondRoute extends StatelessWidget {  //Ca sert a rien mais c'est là
   const SecondRoute({super.key});
   
   @override
